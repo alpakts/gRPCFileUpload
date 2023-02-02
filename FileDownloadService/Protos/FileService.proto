@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+option csharp_namespace = "FileUploadgRPCServiceClient";
+
+package FileService;
+
+// The greeting service definition.
+service FileService {
+  // Sends a greeting
+  rpc UploadFile (stream ByteContent) returns (FileInfo);
+  rpc DownloadFile ( FileInfo) returns (stream ByteContent);
+}
+
+// The request message containing the user's name.
+message ByteContent {
+  int64 FileSize=1;
+  bytes Buffer=2;
+  int32 ReadedBytes=3;
+  FileInfo FileInfo=4;
+}
+
+// The response message containing the greetings.
+message FileInfo {
+  string FileName = 1;
+  string FileExtension=2;
+}
